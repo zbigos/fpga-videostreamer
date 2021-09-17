@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1631898602" />
+    <testcase name="test_vga_core" classname="test.test_vga_core" file="/home/zbyszek/Devel/MyProjects/fpga-vistreamer/test/test_vga_core.py" lineno="16" time="24.53198528289795" sim_time_ns="100001001.0" ratio_time="4076351.7443373804" />
+  </testsuite>
+</testsuites>
