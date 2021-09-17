@@ -1,6 +1,6 @@
 # FPGA variables
 PROJECT = fpga/vga_vistreamer
-SOURCES= src/vga_core.v src/vga_vistreamer.v src/pll.v
+SOURCES= src/vga_core.v src/vga_vistreamer.v src/pll.v src/cache.v
 ICEBREAKER_DEVICE = up5k
 ICEBREAKER_PIN_DEF = fpga/icebreaker.pcf
 ICEBREAKER_PACKAGE = sg48

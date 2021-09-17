@@ -19,6 +19,9 @@ module VGAcore
         output wire drawing_pixels,
         output wire h_sync,
         output wire v_sync,
+        output reg[10:0] hreadwire,
+        output reg[10:0] vreadwire,
+        input [11:0] pixstream,
         output reg[3:0] r,
         output reg[3:0] g,
         output reg[3:0] b
@@ -36,7 +39,6 @@ module VGAcore
 
     reg [10:0] hscan_pos;
     reg [10:0] vscan_pos;
-    
     reg [3:0] proposed_r;
     reg [3:0] proposed_b;
     reg [3:0] proposed_g;
@@ -63,24 +65,26 @@ module VGAcore
             proposed_g = {4'b0};
             proposed_b = {4'b0};
         end else begin
+
+            hreadwire <= hscan_pos;
+            vreadwire <= vscan_pos;
+
             /* advance horizontal scanline */
             hscan_pos = hscan_pos + 1'b1;
+            proposed_r[0] <= pixstream[0];
+            proposed_r[1] <= pixstream[1];
+            proposed_r[2] <= pixstream[2];
+            proposed_r[3] <= pixstream[3];
 
-            proposed_r[0] = hscan_pos[0];
-            proposed_r[1] = hscan_pos[1];
-            proposed_r[2] = hscan_pos[2];
-            proposed_r[3] = hscan_pos[3];
+            proposed_g[0] <= pixstream[4];
+            proposed_g[1] <= pixstream[5];
+            proposed_g[2] <= pixstream[6];
+            proposed_g[3] <= pixstream[7];
 
-            proposed_b[0] = vscan_pos[0];
-            proposed_b[1] = vscan_pos[1];
-            proposed_b[2] = vscan_pos[2];
-            proposed_b[3] = vscan_pos[3];
-                        
-            proposed_g[0] = hscan_pos[4];
-            proposed_g[1] = hscan_pos[5];
-            proposed_g[2] = hscan_pos[6];
-            proposed_g[3] = hscan_pos[7];
-
+            proposed_b[0] <= pixstream[8];
+            proposed_b[1] <= pixstream[9];
+            proposed_b[2] <= pixstream[10];
+            proposed_b[3] <= pixstream[11];
 
             if (hscan_pos == (1056 / RES_PRESCALER)) begin
                 hscan_pos = 0;
